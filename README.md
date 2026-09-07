@@ -37,4 +37,4 @@ coding!
 - Eleazer Abbey #1: [GitHub](https://github.com/abbey-eleazer) / [LinkedIn](https://linkedin.com/in/eleazer-abbey)
 - Adewale Agboke #2: [GitHub](https://github.com/Adewal246) / [LinkedIn](https://www.linkedin.com/in/adewaleagboke)
 - Francisco Arce Aguilar #3: [GitHub](https://github.com/Apai-23) / [LinkedIn](https://linkedin.com/in/francisco-arce-aguilar)
-- Teammate name #4: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
+- Damaris Saavedra #4: [GitHub]https://github.com/damarisaavedra25 / [LinkedIn](https://www.linkedin.com/in/damaris-saavedra/)
