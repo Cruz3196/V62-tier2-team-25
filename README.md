@@ -34,8 +34,7 @@ Everyone on your team should add their name along with a link to their GitHub
 your repo access and to practice PR'ing with your team *before* you start
 coding!
 
-- Eleazer Abbey  #1: [GitHub](https://github.com/abbey-eleazer) / [LinkedIn](https://linkedin.com/in/eleazer-abbey)
+- Eleazer Abbey #1: [GitHub](https://github.com/abbey-eleazer) / [LinkedIn](https://linkedin.com/in/eleazer-abbey)
 - Adewale Agboke #2: [GitHub](https://github.com/Adewal246) / [LinkedIn](https://www.linkedin.com/in/adewaleagboke)
-- Teammate name #3: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
+- Francisco Arce Aguilar #3: [GitHub](https://github.com/Apai-23) / [LinkedIn](https://linkedin.com/in/francisco-arce-aguilar)
 - Teammate name #4: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
-- Teammate name #5: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
