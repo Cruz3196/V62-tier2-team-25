@@ -39,3 +39,4 @@ coding!
 - Francisco Arce Aguilar #3: [GitHub](https://github.com/Apai-23) / [LinkedIn](https://linkedin.com/in/francisco-arce-aguilar)
 - Damaris Saavedra #4: [GitHub](https://github.com/damarisaavedra25) / [LinkedIn](https://www.linkedin.com/in/damaris-saavedra/)
 - Jose Cruz #5: [GitHub](https://github.com/cruz3196) / [LinkedIn](https://www.linkedin.com/in/jose-cruz-6056322b3)
+- Matthew Neie (Developer): [GitHub](https://github.com/MatthewNeie) / [LinkedIn](https://www.linkedin.com/in/matthew-neie)
