@@ -1,17 +1,9 @@
-import { useState } from "react";
-import LandingPage from "./components/LandingPage";
-import { Footer } from "./components/layout/footer";
-import Header from './components/Header';
-import "./App.css";
-import AboutLPG from "./components/AboutLPG";
+import LandingPage from "./Pages/LandingPage";
 
 function App() {
   return (
     <>
-      <Header />
       <LandingPage />
-      <AboutLPG />
-      <Footer />
     </>
   );
 }

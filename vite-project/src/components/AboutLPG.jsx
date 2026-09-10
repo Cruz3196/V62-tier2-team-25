@@ -1,7 +1,7 @@
 const AboutLPG = () => {
   return (
     <>
-      <div className="container mx-auto px-4 py-8 text-center">
+      <div className="container mx-auto px-4 py-8 text-center mt-32">
         <header className="md:w-3/4 mx-auto mb-32">
           <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4">
             {" "}
