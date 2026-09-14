@@ -13,6 +13,9 @@ in your `readme` feel free to replace the text we've provided here.
 
 > Own it & Make it your Own!
 
+## DevTrajectory App Deployment 
+Check out the live application here: [Career Path Generator Live App](https://v62-tier2-team-25-2.onrender.com/)
+
 ## Team Documents
 
 You may find these helpful as you work together to organize your project.
