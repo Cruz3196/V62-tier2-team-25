@@ -179,11 +179,14 @@ const LearningPathPage = () => {
             <div className="flex gap-4 mt-4 text-lg">
               <SkillGroup
                 name="level"
-                value={level}
+                value={formData.level}
                 onChange={(e) => {
-                  setLevel(e.target.value);
-                  handleChange;
-                  formData.level == SkillGroup.value;
+                  const clickedValue = e.target.value;
+                  // Toggle: if it's already selected, clear it (""); otherwise, select it
+                  setFormData((prev) => ({
+                    ...prev,
+                    level: prev.level === clickedValue ? "" : clickedValue,
+                  }));
                 }}
               >
                 <SkillLevel name="level" value="beginner">
@@ -192,10 +195,10 @@ const LearningPathPage = () => {
                 <SkillLevel name="level" value="intermediate">
                   Intermediate
                 </SkillLevel>
-                <SkillLevel value="advanced">Advanced</SkillLevel>
-                {}
+                <SkillLevel name="level" value="advanced">
+                  Advanced
+                </SkillLevel>
               </SkillGroup>
-             
             </div>
           </div>
 
