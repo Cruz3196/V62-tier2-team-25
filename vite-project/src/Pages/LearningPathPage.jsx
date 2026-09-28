@@ -18,6 +18,84 @@ const LearningPathPage = () => {
     timeCommitment,
     setTimeCommitment,
   } = useAppContext();
+  const [ level, setLevel] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [path, setPath] = useState("");
+  // const [background, setBackground] = useState("");
+  // const [time, setTime] = useState("");
+
+  // const userInput = {
+  //    email, path, level, background, time
+  // }
+  // const errorMeessage = () => {
+  //   if (!email || !path || !level || !time) {
+  //     return "Please fill in all required fields.";
+  //   }};
+  // const submit = (e) => {
+  //   e.preventDefault();
+  //   errorMeessage();
+  //   console.log(userInput);
+  // };
+
+  const [formData, setFormData] = useState({
+    level: SkillGroup.value,
+    email: "",
+    path: "",
+    background: "",
+    time: "",
+  });
+
+  // Errors State
+  const [errors, setErrors] = useState({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // Handle Input Changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    
+
+    // Clear error dynamically when user types
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
+  };
+
+  // Validate Required Fields
+  const validate = () => {
+    const newErrors = {};
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email address is required.";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address.";
+    }
+
+    if (!formData.path) {
+      newErrors.path = "Please select a career path.";
+    }
+
+    if (!formData.time) {
+      newErrors.time = "Please select your weekly time commitment.";
+    }
+
+    return newErrors;
+  };
+
+  // Handle Form Submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const validationErrors = validate();
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      setIsSubmitted(false);
+    } else {
+      setErrors({});
+      setIsSubmitted(true);
+      console.log("Form submitted successfully:", formData);
+    }
+  };
 
   return (
     <>
@@ -41,16 +119,22 @@ const LearningPathPage = () => {
           </svg>
           Home
         </Link>
-      </div>
 
-      <form action="">
-        <div className="container lg:w-305 mx-auto px-4 py-8 mt-32 mb-32">
+        <div className="w-full mx-auto px-4 py-8 mt-32 mb-18">
           <h1 className="text-4xl font-bold pb-2">Lets map your path</h1>
           <p>
             A few quick questions so we can build a plan that actually fits you.
             Skip anything you're not sure about.
           </p>
+        </div>
+        {isSubmitted && (
+          <div className="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-medium">
+            Please wait while we generate your learning path.
+          </div>
+        )}
 
+        <form onSubmit={handleSubmit}>
+          {/* EMAIL  */}
           <div className="flex flex-col gap-4 mt-8 text-lg">
             <label htmlFor="email">
               Whats your email? <span className="text-red-500">*</span>
@@ -59,24 +143,35 @@ const LearningPathPage = () => {
               type="email"
               name="email"
               placeholder="example@gmail.com"
-              className="lg:w-300 border-2 border-slate-400 rounded-2xl p-4 text-lg"
+              className={`lg:w-300 border-2 border-slate-400 rounded-2xl p-4 text-lg ${
+                errors.email
+                  ? "border-2 border-red-500"
+                  : " border-2 border-slate-400 "
+              }`}
               onChange={(e) => setEmail(e.target.value)}
             />
+            {errors.email && (
+              <p className="text-rose-500 text-xs font-medium mt-1.5 flex items-center gap-1">
+                {errors.email}
+              </p>
+            )}
           </div>
 
-          {/* Career goal  */}
+          {/* GOAL / PATH  */}
           <div className="flex flex-col gap-4 my-8  text-lg">
-            <label htmlFor="career-goal">
+            <label htmlFor="path">
               Your career goal <span className="text-red-500">*</span>
             </label>
             <select
               name="career-goal"
               id="career-goal"
               disabled=""
-              className="lg:w-xl border border-2 border-slate-400 rounded-2xl p-4 text-lg"
+              className={`lg:w-xl border-2 border-slate-400 rounded-2xl p-4 text-lg ${
+                errors.path ? "border-2 border-red-500" : ""
+              }`}
               onChange={(e) => setCareerGoal(e.target.value)}
             >
-              <option value="scrum-master" disabled="disabled">
+              <option value="" disabled="disabled">
                 Select your path
               </option>
               <option value="scrum-master">Scrum Master</option>
@@ -84,9 +179,14 @@ const LearningPathPage = () => {
               <option value="product-owner">Product Owner</option>
               <option value="ux/ui-designer">UX/UI Designer</option>
             </select>
+            {errors.path && (
+              <p className="text-rose-500 text-xs font-medium mt-1.5 flex items-center gap-1">
+                {errors.path}
+              </p>
+            )}
           </div>
 
-          {/* skill level  */}
+          {/* SKILL LEVEL  */}
           <div>
             <p className="text-lg">Skill level</p>
             <div className="flex gap-4 mt-4 text-lg">
@@ -101,28 +201,32 @@ const LearningPathPage = () => {
             </div>
           </div>
 
-          {/* Background  */}
+          {/* BACKGROUND  */}
           <div className="flex flex-col gap-4 mt-8 text-lg">
             <label htmlFor="background">Background</label>
             <input
               type="text"
               name="background"
               placeholder="eg. Frontend Developer, HTML, CSS, Node js etc."
+              value={formData.background}
+              onChange={handleChange}
               className="lg:w-300 border-2 border-slate-400 rounded-2xl p-4 text-lg"
               onChange={(e) => setBackground(e.target.value)}
             />
           </div>
 
-          {/* Career goal  */}
+          {/* TIME  */}
           <div className="flex flex-col gap-4 mt-8 text-lg">
-            <label htmlFor="career-goal">
+            <label htmlFor="time">
               Time commitment <span className="text-red-500">*</span>
             </label>
             <select
               name="career-goal"
               id="career-goal"
               disabled=""
-              className="lg:w-xl border border-2 border-slate-400 rounded-2xl p-4 text-lg"
+              className={`lg:w-xl border-2 border-slate-400 rounded-2xl p-4 text-lg ${
+                errors.time ? "border-red-500" : ""
+              }`}
               onChange={(e) => setTimeCommitment(e.target.value)}
             >
               <option value="1 month">1 month</option>
@@ -132,7 +236,11 @@ const LearningPathPage = () => {
               <option value="12 months">12 months</option>
               <option value="18 months">18 months</option>
             </select>
-            <input type="email" />
+            {errors.time && (
+              <p className="text-rose-500 text-xs font-medium mt-1.5 flex items-center gap-1">
+                {errors.time}
+              </p>
+            )}
           </div>
           <Gemini />
         </div>
