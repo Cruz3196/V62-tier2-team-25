@@ -31,9 +31,12 @@ export default function Header() {
             >
               Log in
             </Link>
-            <button className="hover:cursor-pointer bg-black px-4 py-2 rounded-full text-white font-medium">
-              Get started
-            </button>
+            <Link
+              to="/learning-path"
+              className="hover:cursor-pointer bg-black px-4 py-2 rounded-full text-white font-medium"
+            >
+              Get Started
+            </Link>
           </div>
         </div>
       </div>

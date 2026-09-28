@@ -1,19 +1,45 @@
 import { Link } from "react-router-dom";
 import GenerateIcon from "../assets/icon-generate.png";
 import { useState } from "react";
-import  SkillLevel, { SkillGroup } from "../components/SkillLevel";
+import SkillLevel, { SkillGroup } from "../components/SkillLevel";
+import Gemini from "@/components/GeminiPrompt";
+import { useAppContext } from "./../context/UserContext";
 
 const LearningPathPage = () => {
-  const [level, setLevel] = useState("");
+  const {
+    email,
+    setEmail,
+    careerGoal,
+    setCareerGoal,
+    skillLevel,
+    setSkillLevel,
+    background,
+    setBackground,
+    timeCommitment,
+    setTimeCommitment,
+  } = useAppContext();
+
+  console.log(email, careerGoal, skillLevel, background, timeCommitment);
+
   return (
     <>
       <div className="max-w-7xl mx-auto px-4 pt-6">
-        <Link 
-          to="/" 
+        <Link
+          to="/"
           className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-xl shadow-sm hover:bg-gray-50 transition-all"
         >
-          <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          <svg
+            className="w-4 h-4 text-gray-500"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+            />
           </svg>
           Home
         </Link>
@@ -36,6 +62,7 @@ const LearningPathPage = () => {
               name="email"
               placeholder="example@gmail.com"
               className="lg:w-300 border-2 border-slate-400 rounded-2xl p-4 text-lg"
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
@@ -49,29 +76,28 @@ const LearningPathPage = () => {
               id="career-goal"
               disabled=""
               className="lg:w-xl border border-2 border-slate-400 rounded-2xl p-4 text-lg"
+              onChange={(e) => setCareerGoal(e.target.value)}
             >
               <option value="scrum-master" disabled="disabled">
                 Select your path
               </option>
               <option value="scrum-master">Scrum Master</option>
-              <option value="backend-developer">Software Developer</option>
-              <option value="fullstack-developer">Product Owner</option>
-              <option value="devops-engineer">UX Designer</option>
+              <option value="web-developer">Web Developer</option>
+              <option value="product-owner">Product Owner</option>
+              <option value="ux/ui-designer">UX/UI Designer</option>
             </select>
           </div>
 
           {/* skill level  */}
           <div>
-            <p className="text-lg">
-              Skill level
-            </p>
+            <p className="text-lg">Skill level</p>
             <div className="flex gap-4 mt-4 text-lg">
               <SkillGroup
-                value={level}
-                onChange={(e) => setLevel(e.target.value)}
+                value={skillLevel}
+                onChange={(e) => setSkillLevel(e.target.value)}
               >
                 <SkillLevel value="beginner">Beginner</SkillLevel>
-                <SkillLevel value="intermeit diate">Intermediate</SkillLevel>
+                <SkillLevel value="intermediate">Intermediate</SkillLevel>
                 <SkillLevel value="advanced">Advanced</SkillLevel>
               </SkillGroup>
             </div>
@@ -85,6 +111,7 @@ const LearningPathPage = () => {
               name="background"
               placeholder="eg. Frontend Developer, HTML, CSS, Node js etc."
               className="lg:w-300 border-2 border-slate-400 rounded-2xl p-4 text-lg"
+              onChange={(e) => setBackground(e.target.value)}
             />
           </div>
 
@@ -98,25 +125,18 @@ const LearningPathPage = () => {
               id="career-goal"
               disabled=""
               className="lg:w-xl border border-2 border-slate-400 rounded-2xl p-4 text-lg"
+              onChange={(e) => setTimeCommitment(e.target.value)}
             >
-              <option value="1">1 months</option>
-              <option value="3">3 months</option>
-              <option value="6">6 months</option>
-              <option value="8">8 months</option>
-              <option value="12">12 months</option>
-              <option value="18">18 months</option>
+              <option value="1 month">1 month</option>
+              <option value="3 months">3 months</option>
+              <option value="6 months">6 months</option>
+              <option value="8 months">8 months</option>
+              <option value="12 months">12 months</option>
+              <option value="18 months">18 months</option>
             </select>
             <input type="email" />
           </div>
-
-          <Link to="/path-results">
-            <div className=" py-4 mt-8 mx-auto rounded-2xl bg-black text-lg text-center  text-white ">
-              <div className="flex items-center justify-center gap-2">
-                <img src={GenerateIcon} alt="icon" />
-                Generate my path
-              </div>
-            </div>
-          </Link>
+          <Gemini />
         </div>
       </form>
     </>

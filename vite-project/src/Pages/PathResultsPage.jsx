@@ -1,8 +1,11 @@
+import GeminiResponse from "@/components/GeminiResponse";
 
 const PathResultsPage = () => {
   return (
-    <div>PathResultsPage</div>
-  )
-}
+    <div>
+      <GeminiResponse />
+    </div>
+  );
+};
 
-export default PathResultsPage
+export default PathResultsPage;
