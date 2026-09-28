@@ -5,7 +5,6 @@ import PathResultsPage from "./Pages/PathResultsPage";
 import LoginPage from "./Pages/LoginPage";
 import ForgotPasswordPage from "./Pages/ForgotPasswordPage";
 import SignupPage from "./Pages/SignupPage";
-import Gemini from "./components/GeminiTest";
 
 function App() {
   return (
@@ -17,7 +16,6 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/register" element={<SignupPage />} />
-        <Route path="/gemini" element={<Gemini />} />
       </Routes>
     </>
   );
