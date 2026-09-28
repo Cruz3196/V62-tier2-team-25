@@ -18,7 +18,7 @@ const LearningPathPage = () => {
     timeCommitment,
     setTimeCommitment,
   } = useAppContext();
-  const [ level, setLevel] = useState("");
+  const [level, setLevel] = useState("");
   // const [email, setEmail] = useState("");
   // const [path, setPath] = useState("");
   // const [background, setBackground] = useState("");
@@ -53,7 +53,6 @@ const LearningPathPage = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    
 
     // Clear error dynamically when user types
     if (errors[name]) {
@@ -208,8 +207,6 @@ const LearningPathPage = () => {
               type="text"
               name="background"
               placeholder="eg. Frontend Developer, HTML, CSS, Node js etc."
-              value={formData.background}
-              onChange={handleChange}
               className="lg:w-300 border-2 border-slate-400 rounded-2xl p-4 text-lg"
               onChange={(e) => setBackground(e.target.value)}
             />
@@ -243,8 +240,8 @@ const LearningPathPage = () => {
             )}
           </div>
           <Gemini />
-        </div>
-      </form>
+        </form>
+      </div>
     </>
   );
 };

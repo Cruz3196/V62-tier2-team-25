@@ -5,7 +5,6 @@ import PathResultsPage from "./Pages/PathResultsPage";
 import LoginPage from "./Pages/LoginPage";
 import ForgotPasswordPage from "./Pages/ForgotPasswordPage";
 import SignupPage from "./Pages/SignupPage";
-import Gemini from "./components/GeminiTest";
 
 function App() {
   return (
