@@ -69,10 +69,11 @@ const LearningPathPage = () => {
       setErrors({});
       setIsSubmitted(true);
       console.log("Form submitted successfully:", formData);
-    // await isSubmitted();
-          navigate('/questions');
+
+      navigate('/questions');
   } catch (error){
-    console.error("submission failed", error)
+    console.error("submission failed", error);
+    setIsSubmitted(false);
   }
   };
 
