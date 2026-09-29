@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GenerateIcon from "../assets/icon-generate.png";
 import { useState } from "react";
 import SkillLevel, { SkillGroup } from "../components/SkillLevel";
@@ -17,52 +17,63 @@ const LearningPathPage = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  // Redirect to questions page 
+  
   // Handle Input Changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     
-
+    
     // Clear error dynamically when user types
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
-
+  
   // Validate Required Fields
   const validate = () => {
     const newErrors = {};
-
+    
     if (!formData.email.trim()) {
       newErrors.email = "Email address is required.";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "Please enter a valid email address.";
     }
-
+    
     if (!formData.path) {
       newErrors.path = "Please select a career path.";
     }
-
+    
     if (!formData.time) {
       newErrors.time = "Please select your weekly time commitment.";
     }
-
+    
     return newErrors;
   };
-
+  
   // Handle Form Submission
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const validationErrors = validate();
 
+    const validationErrors = validate();
+    
+   
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       setIsSubmitted(false);
-    } else {
+      return;
+    }
+    try {
       setErrors({});
       setIsSubmitted(true);
       console.log("Form submitted successfully:", formData);
-    }
+    // await isSubmitted();
+          navigate('/questions');
+  } catch (error){
+    console.error("submission failed", error)
+  }
   };
 
   return (
@@ -234,7 +245,7 @@ const LearningPathPage = () => {
             >
               <div className="flex items-center justify-center gap-2">
                 <img src={GenerateIcon} alt="icon" />
-                Generate my path
+                Continue
               </div>
             </button>
           </div>
