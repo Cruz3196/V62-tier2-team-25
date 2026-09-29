@@ -4,7 +4,6 @@ import { useState } from "react";
 import SkillLevel, { SkillGroup } from "../components/SkillLevel";
 
 const LearningPathPage = () => {
-
   const [formData, setFormData] = useState({
     level: SkillGroup.value,
     email: "",
@@ -17,49 +16,47 @@ const LearningPathPage = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Redirect to questions page 
-  
+  // Redirect to questions page
+
   // Handle Input Changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    
-    
+
     // Clear error dynamically when user types
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
-  
+
   // Validate Required Fields
   const validate = () => {
     const newErrors = {};
-    
+
     if (!formData.email.trim()) {
       newErrors.email = "Email address is required.";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "Please enter a valid email address.";
     }
-    
+
     if (!formData.path) {
       newErrors.path = "Please select a career path.";
     }
-    
+
     if (!formData.time) {
       newErrors.time = "Please select your weekly time commitment.";
     }
-    
+
     return newErrors;
   };
-  
+
   // Handle Form Submission
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const validationErrors = validate();
-    
-   
+
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       setIsSubmitted(false);
@@ -70,11 +67,11 @@ const LearningPathPage = () => {
       setIsSubmitted(true);
       console.log("Form submitted successfully:", formData);
 
-      navigate('/questions');
-  } catch (error){
-    console.error("submission failed", error);
-    setIsSubmitted(false);
-  }
+      navigate("/questions");
+    } catch (error) {
+      console.error("submission failed", error);
+      setIsSubmitted(false);
+    }
   };
 
   return (
@@ -250,8 +247,6 @@ const LearningPathPage = () => {
               </div>
             </button>
           </div>
-
-         
         </form>
       </div>
     </>
