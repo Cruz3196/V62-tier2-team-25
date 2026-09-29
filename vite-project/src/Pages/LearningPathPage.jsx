@@ -4,24 +4,6 @@ import { useState } from "react";
 import SkillLevel, { SkillGroup } from "../components/SkillLevel";
 
 const LearningPathPage = () => {
-  const [ level, setLevel] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [path, setPath] = useState("");
-  // const [background, setBackground] = useState("");
-  // const [time, setTime] = useState("");
-
-  // const userInput = {
-  //    email, path, level, background, time
-  // }
-  // const errorMeessage = () => {
-  //   if (!email || !path || !level || !time) {
-  //     return "Please fill in all required fields.";
-  //   }};
-  // const submit = (e) => {
-  //   e.preventDefault();
-  //   errorMeessage();
-  //   console.log(userInput);
-  // };
 
   const [formData, setFormData] = useState({
     level: SkillGroup.value,
@@ -106,7 +88,7 @@ const LearningPathPage = () => {
           Home
         </Link>
 
-        <div className="w-full mx-auto px-4 py-8 mt-32 mb-18">
+        <div className="w-full mx-auto px-4 py-8 mt-32 mb-8">
           <h1 className="text-4xl font-bold pb-2">Lets map your path</h1>
           <p>
             A few quick questions so we can build a plan that actually fits you.
@@ -119,7 +101,7 @@ const LearningPathPage = () => {
           </div>
         )}
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="mb-18">
           {/* EMAIL  */}
           <div className="flex flex-col gap-4 mt-8 text-lg">
             <label htmlFor="email">
@@ -257,14 +239,7 @@ const LearningPathPage = () => {
             </button>
           </div>
 
-          {/* <Link to="/path-results">
-          <div className=" py-4 mt-8 mx-auto rounded-2xl bg-black text-lg text-center  text-white ">
-            <div className="flex items-center justify-center gap-2">
-              <img src={GenerateIcon} alt="icon" />
-              Generate my path
-            </div>
-          </div>
-         </Link> */}
+         
         </form>
       </div>
     </>
