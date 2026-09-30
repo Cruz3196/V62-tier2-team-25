@@ -33,9 +33,6 @@ export default function Header() {
           >
             Log in
           </Link>
-          <button className="hover:cursor-pointer bg-black px-6 py-2.5 rounded-full text-white font-medium text-base hover:bg-gray-800 transition-all">
-            Get started
-          </button>
         </div>
 
         <button
@@ -78,12 +75,6 @@ export default function Header() {
           >
             Log in
           </Link>
-          <button
-            onClick={() => setIsOpen(false)}
-            className="bg-black text-white py-2.5 rounded-full font-medium text-base w-full"
-          >
-            Get started
-          </button>
         </div>
       )}
     </header>
