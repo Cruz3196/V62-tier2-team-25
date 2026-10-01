@@ -42,7 +42,7 @@ export default function HeroTextContent({ onSignUp, onLoginGuest }) {
 export function CareerAssessmentCTA() {
   return (
     <section className="w-full py-16 px-4 flex justify-center">
-      <div className="w-full max-w-3xl bg-[#fdfaf5] border border-slate-200 rounded-3xl p-8 sm:p-12 shadow-sm text-center flex flex-col items-center">
+      <div className="w-full max-w-3xl bg-[#FBEBD7] border border-slate-200 rounded-3xl p-8 sm:p-12 shadow-sm text-center flex flex-col items-center">
         
         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 mb-6">
           {CAREER_ASSESSMENT_CONTENT.badgeText}
