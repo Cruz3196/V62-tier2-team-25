@@ -2,6 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 import GenerateIcon from "../assets/icon-generate.png";
 import { useState } from "react";
 import SkillLevel, { SkillGroup } from "../components/SkillLevel";
+import Gemini from "@/components/GeminiPrompt";
+import { useAppContext } from "./../context/UserContext";
 
 const LearningPathPage = () => {
   const [formData, setFormData] = useState({
@@ -120,13 +122,12 @@ const LearningPathPage = () => {
               type="email"
               name="email"
               placeholder="example@gmail.com"
-              value={formData.email}
-              onChange={handleChange}
               className={`lg:w-300 border-2 border-slate-400 rounded-2xl p-4 text-lg ${
                 errors.email
                   ? "border-2 border-red-500"
                   : " border-2 border-slate-400 "
               }`}
+              onChange={(e) => setEmail(e.target.value)}
             />
             {errors.email && (
               <p className="text-rose-500 text-xs font-medium mt-1.5 flex items-center gap-1">
@@ -141,21 +142,21 @@ const LearningPathPage = () => {
               Your career goal <span className="text-red-500">*</span>
             </label>
             <select
-              name="path"
-              id="path"
-              value={formData.path}
-              onChange={handleChange}
+              name="career-goal"
+              id="career-goal"
+              disabled=""
               className={`lg:w-xl border-2 border-slate-400 rounded-2xl p-4 text-lg ${
                 errors.path ? "border-2 border-red-500" : ""
               }`}
+              onChange={(e) => setCareerGoal(e.target.value)}
             >
               <option value="" disabled="disabled">
                 Select your path
               </option>
-              <option value="backend-developer">Software Developer</option>
               <option value="scrum-master">Scrum Master</option>
-              <option value="fullstack-developer">Product Owner</option>
-              <option value="devops-engineer">UX Designer</option>
+              <option value="web-developer">Web Developer</option>
+              <option value="product-owner">Product Owner</option>
+              <option value="ux/ui-designer">UX/UI Designer</option>
             </select>
             {errors.path && (
               <p className="text-rose-500 text-xs font-medium mt-1.5 flex items-center gap-1">
@@ -169,26 +170,12 @@ const LearningPathPage = () => {
             <p className="text-lg">Skill level</p>
             <div className="flex gap-4 mt-4 text-lg">
               <SkillGroup
-                name="level"
-                value={formData.level}
-                onChange={(e) => {
-                  const clickedValue = e.target.value;
-                  // Toggle: if it's already selected, clear it (""); otherwise, select it
-                  setFormData((prev) => ({
-                    ...prev,
-                    level: prev.level === clickedValue ? "" : clickedValue,
-                  }));
-                }}
+                value={skillLevel}
+                onChange={(e) => setSkillLevel(e.target.value)}
               >
-                <SkillLevel name="level" value="beginner">
-                  Beginner
-                </SkillLevel>
-                <SkillLevel name="level" value="intermediate">
-                  Intermediate
-                </SkillLevel>
-                <SkillLevel name="level" value="advanced">
-                  Advanced
-                </SkillLevel>
+                <SkillLevel value="beginner">Beginner</SkillLevel>
+                <SkillLevel value="intermediate">Intermediate</SkillLevel>
+                <SkillLevel value="advanced">Advanced</SkillLevel>
               </SkillGroup>
             </div>
           </div>
@@ -200,9 +187,8 @@ const LearningPathPage = () => {
               type="text"
               name="background"
               placeholder="eg. Frontend Developer, HTML, CSS, Node js etc."
-              value={formData.background}
-              onChange={handleChange}
               className="lg:w-300 border-2 border-slate-400 rounded-2xl p-4 text-lg"
+              onChange={(e) => setBackground(e.target.value)}
             />
           </div>
 
@@ -212,17 +198,15 @@ const LearningPathPage = () => {
               Time commitment <span className="text-red-500">*</span>
             </label>
             <select
-              name="time"
-              id="time"
-              value={formData.time}
-              onChange={handleChange}
+              name="career-goal"
+              id="career-goal"
+              disabled=""
               className={`lg:w-xl border-2 border-slate-400 rounded-2xl p-4 text-lg ${
                 errors.time ? "border-red-500" : ""
               }`}
+              onChange={(e) => setTimeCommitment(e.target.value)}
             >
-              <option value="" disabled>
-                Duration
-              </option>
+              <option value="1 month">1 month</option>
               <option value="3 months">3 months</option>
               <option value="6 months">6 months</option>
               <option value="8 months">8 months</option>

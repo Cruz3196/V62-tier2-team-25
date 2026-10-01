@@ -19,7 +19,6 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/register" element={<SignupPage />} />
-        <Route path="/gemini" element={<Gemini />} />
       </Routes>
     </>
   );
