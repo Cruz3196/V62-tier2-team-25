@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Home, Eye, EyeOff, Loader2 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { GoogleLogin } from "@react-oauth/google";
 import leafLogo from "../assets/leaf.png";
 
 import { Input } from "@/components/ui/input";
@@ -11,6 +12,7 @@ import { cn } from "@/lib/utils";
 import { loginSchema } from "@/lib/loginSchema";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
     email: "",
     password: "",
@@ -50,6 +52,20 @@ const LoginPage = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  // Google Login Handlers
+const handleGoogleSuccess = (credentialResponse) => {
+    console.log("Google Login Success:", credentialResponse);
+    
+    localStorage.setItem("isAuthenticated", "true");
+    localStorage.setItem("googleToken", credentialResponse.credential);
+
+    navigate("/learning-path");
+  };
+
+  const handleGoogleError = () => {
+    console.error("Google Login Failed");
   };
 
   const inputClass = (hasError) =>
@@ -183,6 +199,24 @@ const LoginPage = () => {
             {loading ? "Signing in..." : "Sign in"}
           </Button>
         </form>
+
+        <div className="relative flex py-5 items-center">
+          <div className="flex-grow border-t border-slate-200"></div>
+          <span className="flex-shrink mx-4 text-slate-400 text-xs uppercase tracking-wider">o</span>
+          <div className="flex-grow border-t border-slate-200"></div>
+        </div>
+
+        {/* Google OAuth Button */}
+        <div className="flex justify-center w-full">
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={handleGoogleError}
+            theme="outline"
+            size="large"
+            shape="pill"
+            width="100%"
+          />
+        </div>
 
         <p className="mt-8 text-center text-sm text-slate-500">
           Don't have an account?{" "}
