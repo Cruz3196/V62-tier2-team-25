@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GenerateIcon from "../assets/icon-generate.png";
 import { useState } from "react";
 import SkillLevel, { SkillGroup } from "../components/SkillLevel";
@@ -6,37 +6,6 @@ import Gemini from "@/components/GeminiPrompt";
 import { useAppContext } from "./../context/UserContext";
 
 const LearningPathPage = () => {
-  const {
-    email,
-    setEmail,
-    careerGoal,
-    setCareerGoal,
-    skillLevel,
-    setSkillLevel,
-    background,
-    setBackground,
-    timeCommitment,
-    setTimeCommitment,
-  } = useAppContext();
-  const [level, setLevel] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [path, setPath] = useState("");
-  // const [background, setBackground] = useState("");
-  // const [time, setTime] = useState("");
-
-  // const userInput = {
-  //    email, path, level, background, time
-  // }
-  // const errorMeessage = () => {
-  //   if (!email || !path || !level || !time) {
-  //     return "Please fill in all required fields.";
-  //   }};
-  // const submit = (e) => {
-  //   e.preventDefault();
-  //   errorMeessage();
-  //   console.log(userInput);
-  // };
-
   const [formData, setFormData] = useState({
     level: SkillGroup.value,
     email: "",
@@ -48,6 +17,8 @@ const LearningPathPage = () => {
   // Errors State
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // Redirect to questions page
 
   // Handle Input Changes
   const handleChange = (e) => {
@@ -82,17 +53,26 @@ const LearningPathPage = () => {
   };
 
   // Handle Form Submission
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     const validationErrors = validate();
 
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       setIsSubmitted(false);
-    } else {
+      return;
+    }
+    try {
       setErrors({});
       setIsSubmitted(true);
       console.log("Form submitted successfully:", formData);
+
+      navigate("/questions");
+    } catch (error) {
+      console.error("submission failed", error);
+      setIsSubmitted(false);
     }
   };
 
@@ -119,7 +99,7 @@ const LearningPathPage = () => {
           Home
         </Link>
 
-        <div className="w-full mx-auto px-4 py-8 mt-32 mb-18">
+        <div className="w-full mx-auto px-4 py-8 mt-32 mb-8">
           <h1 className="text-4xl font-bold pb-2">Lets map your path</h1>
           <p>
             A few quick questions so we can build a plan that actually fits you.
@@ -132,7 +112,7 @@ const LearningPathPage = () => {
           </div>
         )}
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="mb-18">
           {/* EMAIL  */}
           <div className="flex flex-col gap-4 mt-8 text-lg">
             <label htmlFor="email">
@@ -239,7 +219,18 @@ const LearningPathPage = () => {
               </p>
             )}
           </div>
-          <Gemini />
+
+          <div>
+            <button
+              type="submit"
+              className="w-full py-4 mt-8 mx-auto rounded-2xl bg-black text-lg text-center  text-white cursor-pointer"
+            >
+              <div className="flex items-center justify-center gap-2">
+                <img src={GenerateIcon} alt="icon" />
+                Continue
+              </div>
+            </button>
+          </div>
         </form>
       </div>
     </>

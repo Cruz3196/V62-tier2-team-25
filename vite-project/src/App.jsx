@@ -5,6 +5,8 @@ import PathResultsPage from "./Pages/PathResultsPage";
 import LoginPage from "./Pages/LoginPage";
 import ForgotPasswordPage from "./Pages/ForgotPasswordPage";
 import SignupPage from "./Pages/SignupPage";
+import Gemini from "./components/GeminiTest";
+import { QuestionsPage } from "./Pages/QuestionsPage";
 
 function App() {
   return (
@@ -12,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/learning-path" element={<LearningPathPage />} />
+        <Route path="/questions" element={<QuestionsPage />} />
         <Route path="/path-results" element={<PathResultsPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
