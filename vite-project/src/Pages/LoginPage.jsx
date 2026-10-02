@@ -20,6 +20,7 @@ const LoginPage = () => {
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [welcomeMessage, setWelcomeMessage] = useState("");
 
   // handling input change
   const handleChange = (e) => {
@@ -55,13 +56,22 @@ const LoginPage = () => {
   };
 
   // Google Login Handlers
-const handleGoogleSuccess = (credentialResponse) => {
+  const handleGoogleSuccess = (credentialResponse) => {
     console.log("Google Login Success:", credentialResponse);
     
+    const tokenPayload = JSON.parse(
+      atob(credentialResponse.credential.split(".")[1])
+    );
+
     localStorage.setItem("isAuthenticated", "true");
     localStorage.setItem("googleToken", credentialResponse.credential);
+    localStorage.setItem("userName", tokenPayload.name);
 
-    navigate("/learning-path");
+    setWelcomeMessage(`Welcome, ${tokenPayload.name}!`);
+
+    setTimeout(() => {
+      navigate("/learning-path");
+    }, 2000);
   };
 
   const handleGoogleError = () => {
@@ -104,6 +114,12 @@ const handleGoogleSuccess = (credentialResponse) => {
             <span className="text-emerald-700">Trajectory</span>
           </h1>
         </div>
+
+        {welcomeMessage && (
+          <div className="mb-6 rounded-xl bg-emerald-50 p-4 text-center text-sm font-medium text-emerald-800 border border-emerald-200 animate-fadeIn">
+            {welcomeMessage}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           {errors.form && (
