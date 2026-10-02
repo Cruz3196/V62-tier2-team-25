@@ -1,7 +1,10 @@
 import { useState } from "react";
 import IconGreen from "../assets/icon-green.png";
 import QUESTIONS_DATA from "../data/mockQuestions";
+import questions from "../data/questions";
 import { Link } from "react-router-dom";
+import { useAppContext } from "./../context/UserContext";
+import Gemini from "@/components/GeminiPrompt";
 
 export const QuestionsPage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -9,13 +12,23 @@ export const QuestionsPage = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [finalPayload, setFinalPayload] = useState(null);
 
-  const totalQuestions = QUESTIONS_DATA.length;
+  const { careerGoal, questionnaire, setQuestionnaire } = useAppContext();
+
+  console.log(questionnaire);
+
+  const roleQuestions = questions.filter(
+    (question) => question.role === careerGoal,
+  );
+
+  console.log(roleQuestions);
+
+  const totalQuestions = roleQuestions.length;
 
   // 1. Safe boundary check for Review Screen index
   const isReviewScreen = currentIndex === totalQuestions;
 
   // 2. Safe parsing of active question data
-  const currentQuestion = !isReviewScreen ? QUESTIONS_DATA[currentIndex] : null;
+  const currentQuestion = !isReviewScreen ? roleQuestions[currentIndex] : null;
   const currentSelection = currentQuestion ? answers[currentQuestion.id] : null;
 
   const handleSelectOption = (optionId) => {
@@ -39,6 +52,22 @@ export const QuestionsPage = () => {
   };
 
   const handleSubmitQuiz = () => {
+    const questionnaireResults = roleQuestions.map((question) => {
+      const selectedOptionId = answers[question.id];
+
+      const selectedOption = question.options.find(
+        (option) => option.id === selectedOptionId,
+      );
+
+      return {
+        questionId: question.id,
+        question: question.question,
+        answerId: selectedOptionId,
+        answer: selectedOption?.text || null,
+      };
+    });
+
+    setQuestionnaire(questionnaireResults);
     setIsSubmitted(true);
     setFinalPayload(answers);
     console.log(answers);
@@ -62,6 +91,7 @@ export const QuestionsPage = () => {
           Submission Successful!
         </h2>
         <p className="text-gray-600 mb-6">Your answers have been stored.</p>
+        <Gemini />
         {/* <pre className="text-left text-xs bg-gray-800 text-green-400 p-4 rounded-xl overflow-x-auto mb-6">
           {JSON.stringify(finalPayload, null, 2)}
         </pre> */}
@@ -134,9 +164,9 @@ export const QuestionsPage = () => {
               </p>
 
               <div className="space-y-4 mb-8">
-                {QUESTIONS_DATA.map((q) => {
+                {roleQuestions.map((q) => {
                   const selectedOpt = q.options.find(
-                    (opt) => opt.id === answers[q.id]
+                    (opt) => opt.id === answers[q.id],
                   );
                   return (
                     <div
