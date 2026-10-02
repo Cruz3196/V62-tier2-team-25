@@ -18,7 +18,7 @@ export default function SkillLevel ({children, ...props}) {
     <label
      name="level"
       onClick={handleClick}
-      className={`px-5 py-4 rounded-2xl cursor-pointer border-2 hover:bg-black hover:text-white transition-all ${
+      className={`p-2 md:px-5 md:py-4 rounded-2xl cursor-pointer border-2 hover:bg-black hover:text-white transition-all ${
         value == props.value
           ? "bg-black text-white"
           : "bg-white text-black border-gray-500"

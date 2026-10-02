@@ -8,7 +8,6 @@ export default function Header() {
   return (
     <header className="w-full bg-slate-50 border-b border-slate-200 py-5 px-6 md:px-16 shadow-sm relative">
       <div className="w-full flex items-center justify-between">
-        
         <div className="flex items-center gap-4">
           <img
             src={leafLogo}

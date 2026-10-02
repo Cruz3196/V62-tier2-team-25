@@ -1,30 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GenerateIcon from "../assets/icon-generate.png";
 import { useState } from "react";
 import SkillLevel, { SkillGroup } from "../components/SkillLevel";
+// import Gemini from "@/components/GeminiPrompt"; 
+import { useAppContext } from "./../context/UserContext";
 
 const LearningPathPage = () => {
-  const [ level, setLevel] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [path, setPath] = useState("");
-  // const [background, setBackground] = useState("");
-  // const [time, setTime] = useState("");
 
-  // const userInput = {
-  //    email, path, level, background, time
-  // }
-  // const errorMeessage = () => {
-  //   if (!email || !path || !level || !time) {
-  //     return "Please fill in all required fields.";
-  //   }};
-  // const submit = (e) => {
-  //   e.preventDefault();
-  //   errorMeessage();
-  //   console.log(userInput);
-  // };
+  const context = useAppContext();
 
   const [formData, setFormData] = useState({
-    level: SkillGroup.value,
+    level: "beginner",
     email: "",
     path: "",
     background: "",
@@ -35,11 +21,10 @@ const LearningPathPage = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Handle Input Changes
+  // Handle Input Changes unificados
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    
 
     // Clear error dynamically when user types
     if (errors[name]) {
@@ -69,17 +54,26 @@ const LearningPathPage = () => {
   };
 
   // Handle Form Submission
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     const validationErrors = validate();
 
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       setIsSubmitted(false);
-    } else {
+      return;
+    }
+    try {
       setErrors({});
       setIsSubmitted(true);
       console.log("Form submitted successfully:", formData);
+
+      navigate("/questions");
+    } catch (error) {
+      console.error("submission failed", error);
+      setIsSubmitted(false);
     }
   };
 
@@ -106,7 +100,7 @@ const LearningPathPage = () => {
           Home
         </Link>
 
-        <div className="w-full mx-auto px-4 py-8 mt-32 mb-18">
+        <div className="w-full mx-auto px-4 py-8 mt-32 mb-8">
           <h1 className="text-4xl font-bold pb-2">Lets map your path</h1>
           <p>
             A few quick questions so we can build a plan that actually fits you.
@@ -119,7 +113,7 @@ const LearningPathPage = () => {
           </div>
         )}
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="mb-18">
           {/* EMAIL  */}
           <div className="flex flex-col gap-4 mt-8 text-lg">
             <label htmlFor="email">
@@ -128,14 +122,12 @@ const LearningPathPage = () => {
             <input
               type="email"
               name="email"
-              placeholder="example@gmail.com"
               value={formData.email}
-              onChange={handleChange}
-              className={`lg:w-300 border-2 border-slate-400 rounded-2xl p-4 text-lg ${
-                errors.email
-                  ? "border-2 border-red-500"
-                  : " border-2 border-slate-400 "
+              placeholder="example@gmail.com"
+              className={`lg:w-300 border-2 rounded-2xl p-4 text-lg ${
+                errors.email ? "border-red-500" : "border-slate-400"
               }`}
+              onChange={handleChange}
             />
             {errors.email && (
               <p className="text-rose-500 text-xs font-medium mt-1.5 flex items-center gap-1">
@@ -145,7 +137,7 @@ const LearningPathPage = () => {
           </div>
 
           {/* GOAL / PATH  */}
-          <div className="flex flex-col gap-4 my-8  text-lg">
+          <div className="flex flex-col gap-4 my-8 text-lg">
             <label htmlFor="path">
               Your career goal <span className="text-red-500">*</span>
             </label>
@@ -153,18 +145,18 @@ const LearningPathPage = () => {
               name="path"
               id="path"
               value={formData.path}
-              onChange={handleChange}
-              className={`lg:w-xl border-2 border-slate-400 rounded-2xl p-4 text-lg ${
-                errors.path ? "border-2 border-red-500" : ""
+              className={`lg:w-xl border-2 rounded-2xl p-4 text-lg ${
+                errors.path ? "border-red-500" : "border-slate-400"
               }`}
+              onChange={handleChange}
             >
-              <option value="" disabled="disabled">
+              <option value="" disabled>
                 Select your path
               </option>
-              <option value="backend-developer">Software Developer</option>
               <option value="scrum-master">Scrum Master</option>
-              <option value="fullstack-developer">Product Owner</option>
-              <option value="devops-engineer">UX Designer</option>
+              <option value="web-developer">Web Developer</option>
+              <option value="product-owner">Product Owner</option>
+              <option value="ux/ui-designer">UX/UI Designer</option>
             </select>
             {errors.path && (
               <p className="text-rose-500 text-xs font-medium mt-1.5 flex items-center gap-1">
@@ -178,26 +170,14 @@ const LearningPathPage = () => {
             <p className="text-lg">Skill level</p>
             <div className="flex gap-4 mt-4 text-lg">
               <SkillGroup
-                name="level"
                 value={formData.level}
-                onChange={(e) => {
-                  const clickedValue = e.target.value;
-                  // Toggle: if it's already selected, clear it (""); otherwise, select it
-                  setFormData((prev) => ({
-                    ...prev,
-                    level: prev.level === clickedValue ? "" : clickedValue,
-                  }));
-                }}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, level: e.target.value }))
+                }
               >
-                <SkillLevel name="level" value="beginner">
-                  Beginner
-                </SkillLevel>
-                <SkillLevel name="level" value="intermediate">
-                  Intermediate
-                </SkillLevel>
-                <SkillLevel name="level" value="advanced">
-                  Advanced
-                </SkillLevel>
+                <SkillLevel value="beginner">Beginner</SkillLevel>
+                <SkillLevel value="intermediate">Intermediate</SkillLevel>
+                <SkillLevel value="advanced">Advanced</SkillLevel>
               </SkillGroup>
             </div>
           </div>
@@ -208,10 +188,10 @@ const LearningPathPage = () => {
             <input
               type="text"
               name="background"
-              placeholder="eg. Frontend Developer, HTML, CSS, Node js etc."
               value={formData.background}
-              onChange={handleChange}
+              placeholder="eg. Frontend Developer, HTML, CSS, Node js etc."
               className="lg:w-300 border-2 border-slate-400 rounded-2xl p-4 text-lg"
+              onChange={handleChange}
             />
           </div>
 
@@ -224,14 +204,15 @@ const LearningPathPage = () => {
               name="time"
               id="time"
               value={formData.time}
-              onChange={handleChange}
-              className={`lg:w-xl border-2 border-slate-400 rounded-2xl p-4 text-lg ${
-                errors.time ? "border-red-500" : ""
+              className={`lg:w-xl border-2 rounded-2xl p-4 text-lg ${
+                errors.time ? "border-red-500" : "border-slate-400"
               }`}
+              onChange={handleChange}
             >
               <option value="" disabled>
-                Duration
+                Select time commitment
               </option>
+              <option value="1 month">1 month</option>
               <option value="3 months">3 months</option>
               <option value="6 months">6 months</option>
               <option value="8 months">8 months</option>
@@ -248,23 +229,14 @@ const LearningPathPage = () => {
           <div>
             <button
               type="submit"
-              className="w-full py-4 mt-8 mx-auto rounded-2xl bg-black text-lg text-center  text-white cursor-pointer"
+              className="w-full py-4 mt-8 mx-auto rounded-2xl bg-black text-lg text-center text-white cursor-pointer"
             >
               <div className="flex items-center justify-center gap-2">
                 <img src={GenerateIcon} alt="icon" />
-                Generate my path
+                Continue
               </div>
             </button>
           </div>
-
-          {/* <Link to="/path-results">
-          <div className=" py-4 mt-8 mx-auto rounded-2xl bg-black text-lg text-center  text-white ">
-            <div className="flex items-center justify-center gap-2">
-              <img src={GenerateIcon} alt="icon" />
-              Generate my path
-            </div>
-          </div>
-         </Link> */}
         </form>
       </div>
     </>
