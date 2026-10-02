@@ -2,11 +2,10 @@ import { Link, useNavigate } from "react-router-dom";
 import GenerateIcon from "../assets/icon-generate.png";
 import { useState } from "react";
 import SkillLevel, { SkillGroup } from "../components/SkillLevel";
-// import Gemini from "@/components/GeminiPrompt"; 
+// import Gemini from "@/components/GeminiPrompt";
 import { useAppContext } from "./../context/UserContext";
 
 const LearningPathPage = () => {
-
   const context = useAppContext();
 
   const [formData, setFormData] = useState({
@@ -16,6 +15,9 @@ const LearningPathPage = () => {
     background: "",
     time: "",
   });
+
+  const { setCareerGoal, setSkillLevel, setBackground, setTimeCommitment } =
+    useAppContext();
 
   // Errors State
   const [errors, setErrors] = useState({});
@@ -66,6 +68,10 @@ const LearningPathPage = () => {
       return;
     }
     try {
+      setCareerGoal(formData.path);
+      setSkillLevel(formData.level);
+      setBackground(formData.background);
+      setTimeCommitment(formData.time);
       setErrors({});
       setIsSubmitted(true);
       console.log("Form submitted successfully:", formData);
@@ -153,10 +159,10 @@ const LearningPathPage = () => {
               <option value="" disabled>
                 Select your path
               </option>
-              <option value="scrum-master">Scrum Master</option>
-              <option value="web-developer">Web Developer</option>
-              <option value="product-owner">Product Owner</option>
-              <option value="ux/ui-designer">UX/UI Designer</option>
+              <option value="Scrum Master">Scrum Master</option>
+              <option value="Web Developer">Web Developer</option>
+              <option value="Product Owner">Product Owner</option>
+              <option value="UX/UI Designer">UX/UI Designer</option>
             </select>
             {errors.path && (
               <p className="text-rose-500 text-xs font-medium mt-1.5 flex items-center gap-1">
