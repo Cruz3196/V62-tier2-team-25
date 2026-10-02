@@ -1,6 +1,7 @@
 import { useState } from "react";
 import IconGreen from "../assets/icon-green.png";
 import QUESTIONS_DATA from "../data/mockQuestions";
+import { Link } from "react-router-dom";
 
 export const QuestionsPage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -76,8 +77,28 @@ export const QuestionsPage = () => {
 
   return (
     <>
-      <div className="max-w-7xl mx-auto px-4 pt-6">
+      <div className="max-w-7xl mx-auto px-4 pt-12">
         <section>
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 px-4 py-2 mb-5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-xl shadow-sm hover:bg-gray-50 transition-all"
+          >
+            <svg
+              className="w-4 h-4 text-gray-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+              />
+            </svg>
+            Home
+          </Link>
+
           {/* PROGRESS BAR  */}
           <div className="w-full flex flex-col md:flex-row justify-between items-center gap-4 mb-18">
             <div className="w-full md:w-261 bg-[#9D9B9B] rounded-full h-8">
