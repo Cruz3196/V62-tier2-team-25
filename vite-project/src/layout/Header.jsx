@@ -6,30 +6,27 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="w-full bg-slate-50 border-b border-slate-200 py-5 px-6 md:px-16 shadow-sm relative">
-      <div className="w-full flex items-center justify-between">
-        <div className="flex items-center gap-4">
+    <header className="w-full bg-[#F0EFED] py-5 px-6 relative">
+      {/* Usamos el mismo ancho máximo que tu componente Hero (por ejemplo, max-w-6xl o el que use tu tarjeta) */}
+      <div className="max-w-6xl mx-auto w-full flex items-center justify-between">
+        <div className="flex items-center gap-3">
           <img
             src={leafLogo}
             alt="DevTrajectory Leaf Logo"
-            className="w-9 h-9 object-contain"
+            className="w-7 h-7 object-contain"
           />
           <div>
-            <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight flex items-center">
+            <h1 className="text-lg md:text-xl font-bold tracking-tight flex items-center">
               <span className="text-black">Dev</span>
               <span className="text-emerald-700">Trajectory</span>
             </h1>
-            <p className="text-xs md:text-sm text-slate-500 mt-0.5 hidden md:block">
-              AI-Powered Career & Learning Paths for Software Professionals
-            </p>
           </div>
         </div>
 
-        <div className="hidden sm:flex items-center gap-8">
+        <div className="hidden sm:flex items-center">
           <Link
             to="/login"
-            className="hover:cursor-pointer text-black font-medium text-base hover:text-emerald-700 transition-colors"
-          >
+            className="text-black font-medium text-lg hover:text-emerald-700 transition-colors"  >
             Log in
           </Link>
         </div>
@@ -66,7 +63,7 @@ export default function Header() {
       </div>
 
       {isOpen && (
-        <div className="sm:hidden absolute top-full left-0 w-full bg-slate-50 border-b border-slate-200 py-4 px-6 flex flex-col gap-4 shadow-md z-50">
+        <div className="sm:hidden absolute top-full left-0 w-full bg-[#F0EFED] border-b border-slate-200 py-4 px-6 flex flex-col gap-4 shadow-md z-50">
           <Link
             to="/login"
             onClick={() => setIsOpen(false)}

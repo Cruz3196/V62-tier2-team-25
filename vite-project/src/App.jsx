@@ -9,7 +9,7 @@ import { QuestionsPage } from "./Pages/QuestionsPage";
 
 function App() {
   return (
-    <>
+    <div className="min-h-screen bg-[#F0EFED] w-full overflow-x-hidden flex flex-col m-0 p-0">
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/learning-path" element={<LearningPathPage />} />
@@ -19,7 +19,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/register" element={<SignupPage />} />
       </Routes>
-    </>
+    </div>
   );
 }
 

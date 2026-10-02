@@ -2,7 +2,7 @@ import React from 'react';
 
 const AboutLPG = () => {
   return (
-    <div className="container mx-auto px-4 py-2 text-center mt-4">
+<div className="w-screen relative left-1/2 -translate-x-1/2 bg-[#F0EFED] py-12 px-4 text-center mt-4">
 
       <section className="pt-10 max-w-6xl mx-auto">
         <header className="mb-12">
