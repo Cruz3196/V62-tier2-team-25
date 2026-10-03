@@ -56,10 +56,9 @@ const SignupForm = () => {
     setLoading(true);
 
     try {
-      console.log("New account:", {
-        name: validation.data.name,
-        email: validation.data.email,
-      });
+      localStorage.setItem("userCreds", JSON.stringify(validation.data));
+      alert("Account created successfully!");
+      navigate("/learning-path");
       setFormValues({ name: "", email: "", password: "", confirmPassword: "" });
     } catch {
       setErrors({ form: { message: "An unexpected error occurred" } });

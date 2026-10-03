@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const formSchema = z
   .object({
+    id: z.string().uuid(),
     name: z.string().trim().min(1, "Name is required"),
     email: z
       .string()
@@ -15,6 +16,7 @@ export const formSchema = z
       .regex(/[a-z]/, "Password must contain a lowercase letter")
       .regex(/[0-9]/, "Password must contain a number"),
     confirmPassword: z.string().min(1, "Please confirm your password"),
+    exp: z.number(), // expiration will be added by jwt
   })
   // using refine to check if the password and confirmPassword fields match
   .refine((data) => data.password === data.confirmPassword, {

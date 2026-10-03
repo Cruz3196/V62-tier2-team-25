@@ -10,7 +10,7 @@ const SignupPage = () => {
         <h1 className="max-w-md text-4xl leading-tight tracking-tight text-[#6B6B6B] xl:text-5xl">
           <span className="font-bold">Get step by step</span>
           <br />
-          <span className="font-bold text-[#86A19A]">
+          <span className="font-bold text-[#137333]">
             Learning path generator
           </span>{" "}
           that helps grow their skills
