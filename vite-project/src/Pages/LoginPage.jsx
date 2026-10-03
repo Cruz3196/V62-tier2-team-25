@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Home, Eye, EyeOff, Loader2 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { GoogleLogin } from "@react-oauth/google";
 import leafLogo from "../assets/leaf.png";
 
 import { Input } from "@/components/ui/input";
@@ -11,6 +12,7 @@ import { cn } from "@/lib/utils";
 import { loginSchema } from "@/lib/formSchema";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
     email: "",
     password: "",
@@ -18,6 +20,7 @@ const LoginPage = () => {
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [welcomeMessage, setWelcomeMessage] = useState("");
 
   // handling input change
   const handleChange = (e) => {
@@ -50,6 +53,29 @@ const LoginPage = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  // Google Login Handlers
+  const handleGoogleSuccess = (credentialResponse) => {
+    console.log("Google Login Success:", credentialResponse);
+
+    const tokenPayload = JSON.parse(
+      atob(credentialResponse.credential.split(".")[1]),
+    );
+
+    localStorage.setItem("isAuthenticated", "true");
+    localStorage.setItem("googleToken", credentialResponse.credential);
+    localStorage.setItem("userName", tokenPayload.name);
+
+    setWelcomeMessage(`Welcome, ${tokenPayload.name}!`);
+
+    setTimeout(() => {
+      navigate("/learning-path");
+    }, 2000);
+  };
+
+  const handleGoogleError = () => {
+    console.error("Google Login Failed");
   };
 
   const inputClass = (hasError) =>
@@ -86,6 +112,12 @@ const LoginPage = () => {
               <span className="text-emerald-700">Trajectory</span>
             </h1>
           </div>
+
+          {welcomeMessage && (
+            <div className="mb-6 rounded-xl bg-emerald-50 p-4 text-center text-sm font-medium text-emerald-800 border border-emerald-200 animate-fadeIn">
+              {welcomeMessage}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             {errors.form && (
@@ -181,6 +213,26 @@ const LoginPage = () => {
               {loading ? "Signing in..." : "Sign in"}
             </Button>
           </form>
+
+          <div className="relative flex py-5 items-center">
+            <div className="flex-grow border-t border-slate-200"></div>
+            <span className="flex-shrink mx-4 text-slate-400 text-xs uppercase tracking-wider">
+              o
+            </span>
+            <div className="flex-grow border-t border-slate-200"></div>
+          </div>
+
+          {/* Google OAuth Button */}
+          <div className="flex justify-center w-full">
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={handleGoogleError}
+              theme="outline"
+              size="large"
+              shape="pill"
+              width="100%"
+            />
+          </div>
 
           <p className="mt-8 text-center text-sm text-slate-500">
             Don't have an account?{" "}

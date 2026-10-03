@@ -8,6 +8,8 @@ export function AppProvider({ children }) {
   const [skillLevel, setSkillLevel] = useState(null);
   const [background, setBackground] = useState(null);
   const [timeCommitment, setTimeCommitment] = useState(null);
+
+  const [questionnaire, setQuestionnaire] = useState([]);
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -24,6 +26,8 @@ export function AppProvider({ children }) {
         setBackground,
         timeCommitment,
         setTimeCommitment,
+        questionnaire,
+        setQuestionnaire,
         response,
         setResponse,
         loading,
