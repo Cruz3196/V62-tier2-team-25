@@ -16,7 +16,7 @@ import {
 
 // google sign up button
 import { GoogleLogin } from "@react-oauth/google";
-import { signupSchema } from "@/lib/signupSchema";
+import { formSchema } from "@/lib/formSchema";
 
 const SignupForm = () => {
   const navigate = useNavigate();
@@ -40,7 +40,7 @@ const SignupForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const validation = signupSchema.safeParse(formValues);
+    const validation = formSchema.safeParse(formValues);
     if (!validation.success) {
       const fieldErrors = validation.error.flatten().fieldErrors;
       setErrors({
