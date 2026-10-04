@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 
-import { forgotPasswordSchema } from "@/lib/forgotPasswordSchema";
+import { forgotPasswordSchema } from "@/lib/formSchema";
 
 const ForgotPasswordPage = () => {
   const [formValues, setFormValues] = useState({ email: "" });

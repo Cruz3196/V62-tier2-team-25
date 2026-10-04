@@ -71,14 +71,6 @@ export function CareerAssessmentCTA() {
           {CAREER_ASSESSMENT_CONTENT.disclaimer}
         </p>
 
-        <div className="flex items-center gap-2 mt-6 text-xs text-slate-600 font-medium">
-          <div className="flex -space-x-1.5">
-            <span className="w-5 h-5 rounded-full bg-rose-400 inline-block border-2 border-white"></span>
-            <span className="w-5 h-5 rounded-full bg-blue-500 inline-block border-2 border-white"></span>
-            <span className="w-5 h-5 rounded-full bg-amber-400 inline-block border-2 border-white"></span>
-          </div>
-          <span>{CAREER_ASSESSMENT_CONTENT.socialProof}</span>
-        </div>
       </div>
     </section>
   );

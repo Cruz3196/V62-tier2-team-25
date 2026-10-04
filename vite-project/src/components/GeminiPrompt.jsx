@@ -15,11 +15,18 @@ function Gemini() {
     setBackground,
     timeCommitment,
     setTimeCommitment,
+    questionnaire,
     response,
     setResponse,
     loading,
     setLoading,
   } = useAppContext();
+
+  const questionnaireText = questionnaire
+    .map((item) => `Question: ${item.question}\nAnswer: ${item.answer}`)
+    .join("\n\n");
+
+  console.log(questionnaireText);
 
   const prompt = `
 TASK:
@@ -32,6 +39,9 @@ Current Skill Level: ${skillLevel}
 Background: ${background}
 Time Commitment: ${timeCommitment}
 
+QUESTIONNAIRE RESULTS:
+${questionnaireText}
+
 CONSTRAINTS:
 - Create a realistic learning path based on the learner's available time.
 - Build the curriculum progressively, from foundational concepts to more advanced concepts.
@@ -43,6 +53,29 @@ CONSTRAINTS:
 - Prioritize skills that are directly relevant to the learner's career goal.
 - Do not overwhelm the learner with too many topics at once.
 - Explain why each stage is relevant to the career goal.
+
+OUTPUT:
+Return the learning path as a JSON object with this structure:
+
+{
+  "summary": "...",
+  "estimatedDuration": "...",
+  "stages": [
+    {
+      "title": "...",
+      "description": "...",
+      "estimatedHours": 0,
+      "skills": [],
+      "topics": [],
+      "project": "..."
+      }
+    ]
+  }
+
+IMPORTANT:
+Return ONLY valid JSON.
+Do not wrap the JSON in markdown code fences.
+Do not include any text before or after the JSON.
 `;
 
   async function handleSubmit() {
@@ -61,7 +94,7 @@ CONSTRAINTS:
 
   return (
     <div className="flex flex-col items-center text-left justify-center">
-      <div className="container lg:w-305 mx-auto px-4 py-8 mt-10 mb-12">
+      <div className="container mx-auto px-4 py-8 mt-10 mb-12">
         <Link to="/path-results">
           <div
             className=" py-4 mt-8 mx-auto rounded-2xl bg-black text-lg text-center text-white"
@@ -69,7 +102,7 @@ CONSTRAINTS:
           >
             <div className="flex items-center justify-center gap-2">
               <img src={GenerateIcon} alt="icon" />
-              Generate my path
+              Generate learning path
             </div>
           </div>
         </Link>

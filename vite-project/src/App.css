@@ -2,3 +2,15 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
+
+body {
+  background-color: #F0EFED;
+  margin: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+section {
+  background-color: #F0EFED;
+  width: 100%;
+}
