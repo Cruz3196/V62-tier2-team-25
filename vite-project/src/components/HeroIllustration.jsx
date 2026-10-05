@@ -8,7 +8,7 @@ export default function HeroIllustration() {
       <img
         src={heroImage}
         alt="Illustration of a person working with a laptop and phone"
-        className="w-full max-w-lg rounded-2xl object-cover shadow-sm"
+        className="w-full max-w-lg rounded-2xl object-cover"
       />
     </div>
   );

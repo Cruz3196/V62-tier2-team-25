@@ -4,7 +4,7 @@ import HeroIllustration from './HeroIllustration';
 
 export default function Hero({ onSignUp, onLoginGuest }) {
   return (
-    <section className="w-screen relative left-1/2 -translate-x-1/2 bg-[#F0EFED] py-8 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+    <section className="w-full bg-[#F0EFED] py-8 px-6 sm:px-12 lg:px-20 flex items-center justify-center">
       <div className="max-w-7xl w-full bg-[#FBEBD7] rounded-3xl py-12 px-6 sm:px-12 lg:px-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center shadow-sm">
         <HeroTextContent onSignUp={onSignUp} onLoginGuest={onLoginGuest} />
         <HeroIllustration />

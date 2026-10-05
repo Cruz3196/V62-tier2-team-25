@@ -8,7 +8,7 @@ export default function Header() {
   return (
     <header className="w-full bg-[#F0EFED] py-5 px-6 relative">
       {/* Usamos el mismo ancho máximo que tu componente Hero (por ejemplo, max-w-6xl o el que use tu tarjeta) */}
-      <div className="max-w-6xl mx-auto w-full flex items-center justify-between">
+      <div className="max-w-7xl mx-auto w-full flex items-center justify-between px-2 sm:px-8 lg:px-12">
         <div className="flex items-center gap-3">
           <img
             src={leafLogo}
