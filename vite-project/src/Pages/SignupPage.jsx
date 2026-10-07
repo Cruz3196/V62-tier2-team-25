@@ -10,7 +10,7 @@ const SignupPage = () => {
       <div className="relative hidden lg:flex lg:w-1/2 flex-col justify-center gap-16 bg-[#F8DCC1] px-12 py-16 xl:px-16">
         {/* Botón Home */}
         <div className="absolute top-6 left-6">
-          <Link
+          {/* <Link
             to="/"
             className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-xl shadow-sm hover:bg-gray-50 transition-all"
           >
@@ -28,7 +28,7 @@ const SignupPage = () => {
               />
             </svg>
             Home
-          </Link>
+          </Link> */}
         </div>
            <h1 className="max-w-md text-4xl leading-tight tracking-tight text-[black] xl:text-5xl">
           <span className="font-bold">Get step by step</span>

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import GenerateIcon from "../assets/icon-generate.png";
 import { useState } from "react";
 import SkillLevel, { SkillGroup } from "../components/SkillLevel";
@@ -6,7 +6,7 @@ import SkillLevel, { SkillGroup } from "../components/SkillLevel";
 import { useAppContext } from "./../context/UserContext";
 
 const LearningPathPage = () => {
-  const context = useAppContext();
+  // const context = useAppContext();
 
   const [formData, setFormData] = useState({
     level: "beginner",
@@ -86,7 +86,7 @@ const LearningPathPage = () => {
   return (
     <>
       <div className="max-w-7xl mx-auto px-4 pt-6">
-        <Link
+        {/* <Link
           to="/"
           className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-xl shadow-sm hover:bg-gray-50 transition-all"
         >
@@ -104,9 +104,9 @@ const LearningPathPage = () => {
             />
           </svg>
           Home
-        </Link>
+        </Link> */}
 
-        <div className="w-full mx-auto px-4 py-8 mt-32 mb-8">
+        <div className="w-full mx-auto px-4 py-8 mt-12 mb-8">
           <h1 className="text-4xl font-bold pb-2">Lets map your path</h1>
           <p>
             A few quick questions so we can build a plan that actually fits you.

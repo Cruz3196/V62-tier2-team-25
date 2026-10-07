@@ -6,10 +6,12 @@ import LoginPage from "./Pages/LoginPage";
 import ForgotPasswordPage from "./Pages/ForgotPasswordPage";
 import SignupPage from "./Pages/SignupPage";
 import { QuestionsPage } from "./Pages/QuestionsPage";
+import Header from "./layout/Header";
 
 function App() {
   return (
     <div className="min-h-screen bg-[#F0EFED] w-full overflow-x-hidden flex flex-col m-0 p-0">
+      <Header />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/learning-path" element={<LearningPathPage />} />
