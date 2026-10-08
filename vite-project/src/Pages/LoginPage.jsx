@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Eye, EyeOff, Loader2 } from "lucide-react";
+import { Home, Eye, EyeOff, Loader2 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import leafLogo from "../assets/leaf.png";
@@ -89,13 +89,13 @@ const LoginPage = () => {
   return (
     <div className="w-full">
       <div className="max-w-7xl mx-auto px-4 pt-6">
-        {/* <Link
+        <Link
           to="/"
           className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-xl shadow-sm hover:bg-gray-50 transition-all"
         >
           <Home className="w-4 h-4 text-gray-500" />
           Home
-        </Link> */}
+        </Link>
       </div>
 
       <div className="flex w-full justify-center px-4 py-16 sm:py-24">
@@ -215,11 +215,11 @@ const LoginPage = () => {
           </form>
 
           <div className="relative flex py-5 items-center">
-            <div className="grow border-t border-slate-200"></div>
-            <span className="shrink mx-4 text-slate-400 text-xs uppercase tracking-wider">
+            <div className="flex-grow border-t border-slate-200"></div>
+            <span className="flex-shrink mx-4 text-slate-400 text-xs uppercase tracking-wider">
               o
             </span>
-            <div className="grow border-t border-slate-200"></div>
+            <div className="flex-grow border-t border-slate-200"></div>
           </div>
 
           {/* Google OAuth Button */}
