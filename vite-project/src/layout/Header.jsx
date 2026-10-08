@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import leafLogo from "../assets/leaf.png";
 import { Link } from "react-router-dom";
 
@@ -9,7 +9,7 @@ export default function Header() {
     <header className="w-full bg-[#F0EFED] py-5 px-6 relative">
       {/* Usamos el mismo ancho máximo que tu componente Hero (por ejemplo, max-w-6xl o el que use tu tarjeta) */}
       <div className="max-w-7xl mx-auto w-full flex items-center justify-between px-2 sm:px-8 lg:px-12">
-        <div className="flex items-center gap-3">
+        <Link to='/' className="flex items-center gap-3 cursor-pointer">
           <img
             src={leafLogo}
             alt="DevTrajectory Leaf Logo"
@@ -21,7 +21,7 @@ export default function Header() {
               <span className="text-emerald-700">Trajectory</span>
             </h1>
           </div>
-        </div>
+        </Link>
 
         <div className="hidden sm:flex items-center">
           <Link
