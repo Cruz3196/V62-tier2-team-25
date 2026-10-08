@@ -1,8 +1,8 @@
 import { useState } from "react";
 import IconGreen from "../assets/icon-green.png";
-// import QUESTIONS_DATA from "../data/mockQuestions";
+import QUESTIONS_DATA from "../data/mockQuestions";
 import questions from "../data/questions";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAppContext } from "./../context/UserContext";
 import Gemini from "@/components/GeminiPrompt";
 
@@ -107,9 +107,9 @@ export const QuestionsPage = () => {
 
   return (
     <>
-      <div className="max-w-7xl mx-auto mb-18 px-4 pt-12">
+      <div className="max-w-7xl mx-auto px-4 pt-12">
         <section>
-          {/* <Link
+          <Link
             to="/learning-path"
             className="inline-flex items-center gap-2 px-4 py-2 mb-5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-xl shadow-sm hover:bg-gray-50 transition-all"
           >
@@ -127,10 +127,10 @@ export const QuestionsPage = () => {
               />
             </svg>
             Back
-          </Link> */}
+          </Link>
           
           {/* PROGRESS BAR  */}
-          <div className="w-full flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
+          <div className="w-full flex flex-col md:flex-row justify-between items-center gap-4 mb-18">
             <div className="w-full md:w-261 bg-[#9D9B9B] rounded-full h-8">
               <div
                 className="max-w-full w-[20%] bg-[#337563] rounded-full h-8 transition-all duration-300"
